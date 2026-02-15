@@ -5,7 +5,24 @@ const elements = {
     author: document.getElementById("author"),
 };
 
-const quotes = [
+async function getRandomImage() {
+    const client_id = "API_KEY_HERE";
+    const endpoint = `https://api.unsplash.com/photos/random/?client_id=${client_id}`;
+    try {
+        const response = await fetch(endpoint);
+        const returnedData = await response.json()
+        const receivedPhotoUrl = returnedData.urls.regular;
+
+        const imgDiv = document.querySelector(".background-img");
+        imgDiv.style.backgroundImage = `url("${receivedPhotoUrl}")`;
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+getRandomImage();
+
+/* const quotes = [
     {
         quote: "Time spent with cats is never wasted.",
         author: "Sigmund Freud",
@@ -35,4 +52,4 @@ function loopThroughQuotes() {
     }, 3000);
 }
 
-setTimeout(loopThroughQuotes, 3000);
+setTimeout(loopThroughQuotes, 3000); */
